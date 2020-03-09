@@ -55,6 +55,7 @@ public abstract class PlantillaServer extends Thread {
 	protected String pathServer = null;
 	protected String api_key = null;
 	protected String nombreServidor = null;
+	protected boolean cerrarConexion = true;
 	protected HashMap<String, String> peticion = new HashMap<String, String>();
 	protected HashMap<String, String> cookieList = new HashMap<String, String>();
 	//#endregion
@@ -236,7 +237,7 @@ public abstract class PlantillaServer extends Thread {
     protected void enviarCabecera() throws IOException {
         String cab = this.cabecera.toString();
         System.out.println(cab);
-        System.out.print('\n');
+        //System.out.print('\n');
         this.log.agregarRespuesta(cab);
         this.enviarBytes(cab.getBytes());
     }
@@ -302,7 +303,8 @@ public abstract class PlantillaServer extends Thread {
 		}
 		else
 			this.seleccionPeticion();
-		this.cerrarConexion();
+		if(this.cerrarConexion)
+			this.cerrarConexion();
 	}
 	@Override
 	public void run() {

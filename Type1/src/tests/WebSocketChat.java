@@ -12,11 +12,13 @@ import framework.classes.*;
 
 import java.util.Base64;
 
+//https://websockets.readthedocs.io/en/stable/intro.html
 public class WebSocketChat extends PlantillaWebSocket {
 	public WebSocketChat(String nombreServidor, String pathServer, String api_key) {
 		super(nombreServidor, pathServer, api_key);
         this.cabecera.setAcessControlAllowOrigin("*");
         this.cabecera.setServerName(this.nombreServidor);
+        this.cerrarConexion = false;
 	}
 	@Override
 	protected void resolverDelete() throws IOException {
@@ -29,12 +31,11 @@ public class WebSocketChat extends PlantillaWebSocket {
 				String seckey = this.peticion.get(PlantillaWebSocket.SEC_WEBSOCKET_KEY);
 				String sha1 = "";
 				
-				/*
-				seckey.concat("258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
-				System.out.print(seckey);*/
+				
+				/*seckey.concat("258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
 				
 				
-				/*try {
+				try {
 					MessageDigest digest = MessageDigest.getInstance("SHA-1");
 			        digest.reset();
 			        digest.update(seckey.getBytes("utf8"));
@@ -52,8 +53,8 @@ public class WebSocketChat extends PlantillaWebSocket {
 					(seckey + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").
 					getBytes("UTF-8")));
 				} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					sha1 = null;
 				}
 				
 				

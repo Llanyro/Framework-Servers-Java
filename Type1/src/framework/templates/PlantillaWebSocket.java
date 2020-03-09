@@ -29,7 +29,7 @@ public abstract class PlantillaWebSocket extends PlantillaServer {
 	// #endregion
     // #endregion
 	protected void acceptWebsocketConnection(String key) throws IOException {		
-		this.cabecera.addCabeceraExtra(PlantillaWebSocket.SEC_WEBSOCKET_KEY + ": " + key);
+		this.cabecera.addCabeceraExtra("Sec-WebSocket-Accept: " + key);
 		this.cabecera.addCabeceraExtra("Sec-WebSocket-Extensions: permessage-deflate");
 		this.cabecera.setConnection(PlantillaWebSocket.UPGRADE_CONNECTION);
 		this.cabecera.setUpgrade(PlantillaWebSocket.UPGRADE_TYPE);
