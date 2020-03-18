@@ -71,7 +71,7 @@ public class Cabecera {
 	public void addCabeceraExtra(String cabecera) { this.cabecerasExtras.add(cabecera); }
 	
 	// Remove
-	public void removeCookie(String cookieKey) { this.cookies.remove(cookieKey); }
+	//public void removeCookie(String cookieKey) { this.cookies.remove(cookieKey); }
 	public void removeCabeceraExtra(String cabecera) { this.cabecerasExtras.remove(cabecera); }
 	public void removeFechaExpiracion() {
     	this.date = null;

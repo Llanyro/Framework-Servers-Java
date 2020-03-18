@@ -4,8 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
+//import java.net.URLDecoder;
+//import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import framework.classes.Cabecera;
@@ -107,13 +107,13 @@ public abstract class PlantillaServer extends Thread {
                 // Dividimos la direccion del servidor y la acccion a realizar
                 String[] urlDividida = parametros[0].split("/");
                 if(urlDividida.length < 3)
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION , parametros[0]);
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, parametros[0]);
                 else {
                     StringBuffer res = new StringBuffer();
                     for(int i = 2; i < urlDividida.length; i++) {
                         res.append("/" + urlDividida[i]);
                     }
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION ,res.toString());
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
                 }
                 // Añadimos los parametos
                 this.guardarParametrosPeticion(parametros[1]);
@@ -122,14 +122,27 @@ public abstract class PlantillaServer extends Thread {
                 // Dividimos la direccion del servidor y la acccion a realizar
                 String[] urlDividida = primerSplit[1].split("/");
                 if(urlDividida.length < 3)
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION ,primerSplit[1]);
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, primerSplit[1]);
                 else {
                     StringBuffer res = new StringBuffer();
                     for(int i = 2; i < urlDividida.length; i++) {
                         res.append("/" + urlDividida[i]);
                     }
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION ,res.toString());
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
                 }
+            }
+        }
+        else {
+            // Dividimos la direccion del servidor y la acccion a realizar
+            String[] urlDividida = primerSplit[1].split("/");
+            if(urlDividida.length < 3)
+                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, primerSplit[1]);
+            else {
+                StringBuffer res = new StringBuffer();
+                for(int i = 2; i < urlDividida.length; i++) {
+                    res.append("/" + urlDividida[i]);
+                }
+                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
             }
         }
     }
