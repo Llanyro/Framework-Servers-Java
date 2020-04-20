@@ -134,12 +134,12 @@ public class Cabecera {
 				resultado.append(this.encodingType);
 			}
 			resultado.append((String) "\r\n");
-			
-			resultado.append((String) "Content-Length: ");
-			resultado.append(this.contentLength);
-			resultado.append((String) "\r\n");
-			resultado.append((String) "Accept-Ranges: bytes\r\n");
 		}
+		
+		resultado.append((String) "Content-Length: ");
+		resultado.append(this.contentLength);
+		resultado.append((String) "\r\n");
+		resultado.append((String) "Accept-Ranges: bytes\r\n");
 		
 		for (int i = 0; i < this.cabecerasExtras.size(); i++) {
 			resultado.append(cabecerasExtras.get(i));
