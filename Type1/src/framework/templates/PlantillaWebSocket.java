@@ -1,11 +1,6 @@
 package framework.templates;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.Socket;
-import java.security.MessageDigest;
-import java.util.Base64;
 
 import framework.classes.ContentType;
 import framework.templates.PlantillaServer;
