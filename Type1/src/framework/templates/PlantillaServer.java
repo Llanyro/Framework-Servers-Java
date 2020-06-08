@@ -3,8 +3,9 @@ package framework.templates;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
-//import java.net.URLDecoder;
+import java.net.URLDecoder;
 //import java.nio.charset.Charset;
 import java.util.HashMap;
 
@@ -97,8 +98,8 @@ public abstract class PlantillaServer extends Thread {
 	private void agregarPrimeraLiena(String primeraLinea) throws NumberFormatException, IOException {
         String[] primerSplit = primeraLinea.split(" ");
         // Añadimos el GET, POST o lo que sea
-        this.peticion.put(PlantillaServer.PETICION, primerSplit[0]);
-        this.peticion.put(PlantillaServer.VERSION, primerSplit[2]);
+        this.peticion.put(PlantillaServer.PETICION, URLDecoder.decode(primerSplit[0], "UTF-8"));
+        this.peticion.put(PlantillaServer.VERSION, URLDecoder.decode(primerSplit[2], "UTF-8"));
 
         if(primerSplit[0].equalsIgnoreCase("GET")) {
             // Significa que tiene parametros de entrada
@@ -107,13 +108,13 @@ public abstract class PlantillaServer extends Thread {
                 // Dividimos la direccion del servidor y la acccion a realizar
                 String[] urlDividida = parametros[0].split("/");
                 if(urlDividida.length < 3)
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, parametros[0]);
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(parametros[0], "UTF-8"));
                 else {
                     StringBuffer res = new StringBuffer();
                     for(int i = 2; i < urlDividida.length; i++) {
                         res.append("/" + urlDividida[i]);
                     }
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(res.toString(), "UTF-8"));
                 }
                 // Añadimos los parametos
                 this.guardarParametrosPeticion(parametros[1]);
@@ -122,13 +123,13 @@ public abstract class PlantillaServer extends Thread {
                 // Dividimos la direccion del servidor y la acccion a realizar
                 String[] urlDividida = primerSplit[1].split("/");
                 if(urlDividida.length < 3)
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, primerSplit[1]);
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(primerSplit[1], "UTF-8"));
                 else {
                     StringBuffer res = new StringBuffer();
                     for(int i = 2; i < urlDividida.length; i++) {
                         res.append("/" + urlDividida[i]);
                     }
-                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
+                    this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(res.toString(), "UTF-8"));
                 }
             }
         }
@@ -136,17 +137,17 @@ public abstract class PlantillaServer extends Thread {
             // Dividimos la direccion del servidor y la acccion a realizar
             String[] urlDividida = primerSplit[1].split("/");
             if(urlDividida.length < 3)
-                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, primerSplit[1]);
+                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(primerSplit[1], "UTF-8"));
             else {
                 StringBuffer res = new StringBuffer();
                 for(int i = 2; i < urlDividida.length; i++) {
                     res.append("/" + urlDividida[i]);
                 }
-                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, res.toString());
+                this.peticion.put(PlantillaServer.PARAMETROS_PETICION, URLDecoder.decode(res.toString(), "UTF-8"));
             }
         }
     }
-    private void guardarParametrosPeticion(String param) {
+    private void guardarParametrosPeticion(String param) throws UnsupportedEncodingException {
     	System.out.println(param);
         // Añadimos los parametos
         String[] parametrosGet = param.split("&");
@@ -154,7 +155,7 @@ public abstract class PlantillaServer extends Thread {
             String[] val = parametrosGet[i].split("=");
             if(val.length == 2)
             	if(val[0].length() > 0 && val[1].length() > 0)
-            		this.peticion.put(val[0], val[1]);
+            		this.peticion.put(URLDecoder.decode(val[0], "UTF8"), URLDecoder.decode(val[1], "UTF-8"));
         }
     }
 	/*
@@ -169,7 +170,7 @@ public abstract class PlantillaServer extends Thread {
 				if(buff.length() > 0) {
 					String[] spliteado = buff.split(": ");
 					if(spliteado.length == 2)
-						this.peticion.put(spliteado[0], spliteado[1]);
+						this.peticion.put(URLDecoder.decode(spliteado[0], "UTF-8"), URLDecoder.decode(spliteado[1], "UTF-8"));
 					else
 						System.out.println( "Error parametro: " + buff);
 				}
