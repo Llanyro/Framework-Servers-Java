@@ -7,4 +7,4 @@ And add to java project as external lib
 ```
 ## Use example
 Just follow the example in Example/main.java and Example/APIServer.java
-
+Those example are for know how to use the framework, because, that code is from other project.
