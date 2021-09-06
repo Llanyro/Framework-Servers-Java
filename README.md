@@ -7,6 +7,9 @@ And add to java project as external lib
 ```
 ## Use example
 ```
-Just follow the example in Example/main.java and Example/APIServer.java
-Those example are for know how to use the framework, because, that code is from other project.
+Follow the example in Example/main.java and Example/APIServer.java
+This example is for know how to use the framework, because, that code is from other project.
+
+Or use the simple excample Type1/src/tests/OtroMain.java and Type1/src/tests/ServidorInterfaz.java
+This exmaple can be executed.
 ```
